@@ -21,10 +21,11 @@ placeOrder = (idVal, pCount, initCount) => {
     // app checks to see if product is available
     if ((initCount - pCount) >= 0) {
         newCount = initCount - pCount;
-        // update the SQL database, show the customer the total cost of purchase
+        // update the SQL database
         connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?', [newCount, idVal], function (e, r, f) {
             if (e) console.log(e);
             });
+            // show the customer the total cost of purchase
             connection.query({
                 sql: 'SELECT * FROM `products` WHERE `item_id` = ?',
                 values: [idVal]
@@ -92,8 +93,6 @@ main = () => {
 
         // then prompts the user with two messages: what they want to buy and how many
         setTimeout(initialPrompts, 1000);
-    
-
     });
 }
 
