@@ -1,0 +1,23 @@
+{
+  "name": "store_front",
+  "version": "1.0.0",
+  "description": "Store Front With Node!",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryangrunest/Store_Front.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryangrunest/Store_Front/issues"
+  },
+  "homepage": "https://github.com/ryangrunest/Store_Front#readme",
+  "dependencies": {
+    "inquirer": "^6.2.2",
+    "mysql": "^2.16.0"
+  }
+}
