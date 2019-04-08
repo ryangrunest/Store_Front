@@ -13,7 +13,7 @@ placeOrder = (idVal, pCount, initCount) => {
     idVal = parseInt(idVal);
     pCount = parseInt(pCount);
     initCount = parseInt(initCount);
-    console.log(idVal, pCount, initCount);
+    // console.log(idVal, pCount, initCount);
     if (isNaN(idVal) || isNaN(pCount) || isNaN(initCount)) {
         console.log('Must enter a number! Returning to main program...');
         initialPrompts();
@@ -21,18 +21,20 @@ placeOrder = (idVal, pCount, initCount) => {
     // app checks to see if product is available
     if ((initCount - pCount) >= 0) {
         newCount = initCount - pCount;
-        console.log(pCount);
+        // update the SQL database, show the customer the total cost of purchase
         connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?', [newCount, idVal], function (e, r, f) {
             if (e) console.log(e);
-                // console.log('changed ' + r.changedRows + ' rows');
             });
             connection.query({
                 sql: 'SELECT * FROM `products` WHERE `item_id` = ?',
                 values: [idVal]
             }, (error, results, fields) => {
                 if (error) throw console.log(error);
-                console.log(`Purchased ${pCount} ${results[0].product_name}s for a total of $${pCount * parseInt(results[0].price)}`);
-                connection.end();
+                console.log('Finalizing Sale...');
+                setTimeout(() => {
+                    console.log(`Purchased ${pCount} ${results[0].product_name}s for a total of $${pCount * parseInt(results[0].price)}.`);
+                    connection.end();
+                }, 2000);
             });
     } else if ((initCount - pCount) < 0)  {
         console.log('Not enough quantity, please try again with a lower amount');
@@ -93,18 +95,6 @@ main = () => {
     
 
     });
-    // connection.end();
 }
-
-
-    
-
-
-
-
-// if not, log to the user
-
-// if  it  does...
-// update the SQL database, show the customer the total cost of purchase
 
 main();
