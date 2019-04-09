@@ -76,9 +76,13 @@ viewLowInventory = () => {
     })
 }
 
+addInventory = () => {
+
+}
+
 // add to inventory
 // lets the manager add more of an item to the store
-addInventory = ()  => {
+addProduct = ()  => {
     inquirer.prompt([
         {
             name: 'inpName',
@@ -102,8 +106,7 @@ addInventory = ()  => {
             console.log('Product Added Successfully!');
         });
         resetProgram();
-    })
-    
+    })   
 }
 
 main = () => {
@@ -121,9 +124,9 @@ main = () => {
         } else if (answers.userRoute === 'View Low Inventory') {
             viewLowInventory();
         } else if (answers.userRoute === 'Add To Inventory') {
-            addInventory();
+            
         } else if (answers.userRoute === 'Add New Product') {
-            console.log('add new prodicut');
+            addProduct();
         } else {
             count = 2;
             console.log('Deleting Hard Drive in 3...');
