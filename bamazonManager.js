@@ -15,7 +15,6 @@ const connection = mysql.createConnection({
 resetProgram = () => {
     console.log(ui.toString());
     ui.resetOutput();
-    connection.end();
     setTimeout(main, 2000);
 }
 
@@ -76,12 +75,37 @@ viewLowInventory = () => {
     })
 }
 
-addInventory = () => {
-
-}
-
 // add to inventory
 // lets the manager add more of an item to the store
+addInventory = () => {
+    inquirer.prompt([
+        {
+            name: 'IDVal',
+            message: 'ID of the product you are updating:'
+        },
+        {
+            name: 'quantVal',
+            message: 'Quantity you would like to add:'
+        }
+    ]).then((answers) => {
+        connection.query({
+            sql: 'SELECT * FROM `products` WHERE `item_id` = ?',
+            values: [answers.IDVal]
+        }, (error, results, fields) => {
+            if (error) return console.log(error);
+            let updateQuantity = (parseInt(results[0].stock_quantity) + parseInt(answers.quantVal));
+            connection.query(`UPDATE products SET stock_quantity = ${updateQuantity} WHERE item_id = ${answers.IDVal};`, 
+            (err, res, fds) => {
+                if (err) return console.log(err);
+                console.log('Quantity Updated Successfully!');
+            })
+        })
+        setTimeout(main, 2000);
+    })
+}
+
+// add new product
+// add new product to store
 addProduct = ()  => {
     inquirer.prompt([
         {
@@ -98,14 +122,13 @@ addProduct = ()  => {
             message: 'Quantity: '
         }
     ]).then((answers) => {
-        console.log(answers.inpName)
         connection.query(`INSERT INTO products(product_name, department_name, price, stock_quantity)
          VALUES ('${answers.inpName}', '${answers.inpDep}', ${parseInt(answers.inpPrice)}, ${parseInt(answers.inpQuant)});`
          ,(err,res,fds) => {
             if (err) return console.log(err);
             console.log('Product Added Successfully!');
         });
-        resetProgram();
+        setTimeout(main, 2000);
     })   
 }
 
@@ -124,7 +147,7 @@ main = () => {
         } else if (answers.userRoute === 'View Low Inventory') {
             viewLowInventory();
         } else if (answers.userRoute === 'Add To Inventory') {
-            
+            addInventory();
         } else if (answers.userRoute === 'Add New Product') {
             addProduct();
         } else {
@@ -137,7 +160,10 @@ main = () => {
             setTimeout(() => {
                 clearInterval(timer);
                 console.log('Program Ended.');
-            }, 4000)    
+                if (connection.state != 'disconnected') {
+                    connection.end();
+                }
+            }, 4000)
         }
     })
 }
@@ -149,7 +175,6 @@ main = () => {
 
 
 
-// add new product
-// add new product to store
+
 
 main();
