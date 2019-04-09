@@ -18,7 +18,6 @@ resetProgram = () => {
     setTimeout(main, 2000);
 }
 
-
 // view products for sale
 // lists available item(s): ids,names,prices,quantities
 viewProducts = () => {
@@ -167,14 +166,5 @@ main = () => {
         }
     })
 }
-
-
-
-
-
-
-
-
-
 
 main();

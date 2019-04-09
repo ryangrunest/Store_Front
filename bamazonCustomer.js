@@ -9,6 +9,24 @@ const connection = mysql.createConnection({
     database: 'bamazon'
   });
 
+updateSales = (quantity, itemID) => {
+    connection.query('SELECT price, product_sales from `products` WHERE `item_id` = ' + itemID, (err,res,fds) => {
+        if (err) return console.log(err);
+        // console.log(res);
+        totalSales = quantity * res[0].price;
+        console.log(totalSales)
+        if (res.product_sales != null) {
+            totalSales += res.product_sales;
+        }
+        console.log(res[0].price);
+        connection.query(`UPDATE products SET product_sales = ${parseInt(totalSales)} WHERE item_id = ${itemID}`, (er, re, fd) => {
+            if (er) console.log(er);
+            console.log('SUCCESS');
+        });
+    })
+    
+}
+
 placeOrder = (idVal, pCount, initCount) => {
     idVal = parseInt(idVal);
     pCount = parseInt(pCount);
@@ -25,6 +43,7 @@ placeOrder = (idVal, pCount, initCount) => {
         connection.query('UPDATE products SET stock_quantity = ? WHERE item_id = ?', [newCount, idVal], function (e, r, f) {
             if (e) console.log(e);
             });
+            updateSales(pCount, idVal);
             // show the customer the total cost of purchase
             connection.query({
                 sql: 'SELECT * FROM `products` WHERE `item_id` = ?',
