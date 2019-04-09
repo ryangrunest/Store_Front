@@ -2,14 +2,14 @@ const mysql = require('mysql');
 const inquirer = require('inquirer');
 var ui = require('cliui')({
     width: 80
-  })
+})
 
 // init connection variable
 const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'cheese',
-    database: 'bamazon'
+    database : 'bamazon'
   });
 
 resetProgram = () => {

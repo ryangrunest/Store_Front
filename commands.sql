@@ -64,3 +64,31 @@ INSERT INTO products ( product_name, department_name, price, stock_quantity )
 INSERT INTO products ( product_name, department_name, price, stock_quantity )
    VALUES
    ( 'dish drainer', 'kitchen', 10, 3 );
+
+
+
+
+ use bamazon;
+-- Then create a Table inside of that database called products.
+CREATE TABLE departments (
+department_id INT NOT NULL AUTO_INCREMENT,
+department_name VARCHAR(100) NOT NULL,
+over_head_costs INT NOT NULL,
+PRIMARY KEY (department_id)
+)
+
+INSERT INTO bamazon.departments ( department_name, over_head_costs )
+   VALUES
+   ( 'furniture', 20000 );
+INSERT INTO bamazon.departments ( department_name, over_head_costs )
+   VALUES
+   ( 'electronics', 30000 );
+INSERT INTO bamazon.departments ( department_name, over_head_costs )
+   VALUES
+   ( 'decoration', 5000 );
+INSERT INTO bamazon.departments ( department_name, over_head_costs )
+   VALUES
+   ( 'kitchen', 10000 );
+
+ALTER TABLE bamazon.products
+ADD [COLUMN] product_sales VARCHAR(35) [FIRST|AFTER stock_quantity];
