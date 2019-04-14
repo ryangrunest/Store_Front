@@ -1,21 +1,69 @@
 # Store_Front
-Store Front With Node!
+Store Front With Node! Track items, inventory, products, sales, and productivity from the command line / terminal.
 
 ## Setup
 
 #### 1. Clone or Download the repository onto your local machine
 
-#### 2. Within the command line or terminal Run npm install, and the following packages should be installed:
+#### 2. Within the command line or terminal run `npm install`, and the following packages should be installed:
 
 * [cli-table3](https://www.npmjs.com/package/cli-table3)
 * [cliui](https://www.npmjs.com/package/cliui)
 * [inquirer](https://www.npmjs.com/package/inquirer)
 * [mysql](https://www.npmjs.com/package/mysql)
 
-## NOTICE
-## You will need to retrieve API keys for [spotify](https://developer.spotify.com/dashboard/login), [bandsintown](https://manager.bandsintown.com/), and [OMDB](http://www.omdbapi.com/).
+#### 3. You will need to have a local version of MySQL running. For more information, check out the [MySQL Website](https://www.mysql.com/).
 
-#### 3. Create a file named keys.js and store it somewhere safe (you will need to reference it):
+#### 4. Run the database commands within `commands.sql` to create and initialize your bamazon database. Note: you do not have to run the following command:
+
+```
+-- Populate this database with around 10 different products.
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'chair', 'furniture', 50.00, 12 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'table', 'furniture', 100.00, 7 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'television', 'electronics', 120, 10 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'plant', 'decoration', 7.00, 9 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'mirror', 'decoration', 25.00, 13 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'toaster', 'kitchen', 22.00, 8 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'knife set', 'kitchen', 44.00, 4 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'speakers', 'electronics', 15.00, 22 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'big plant', 'decoration', 14.00, 9 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'dresser', 'furniture', 55.00, 5 );
+
+INSERT INTO products ( product_name, department_name, price, stock_quantity )
+   VALUES
+   ( 'dish drainer', 'kitchen', 10, 3 );
+
+```
+This just starts you off with some items already in your database. :)
 
 ## Introduction
 Store Front has three commands:
@@ -70,3 +118,7 @@ Allows the user to create a new department, i.e dragons, furniture, etc.
 
 #### Exit
 Exits the program. This one **definitely** doesn't delete your hard drive. 
+
+
+# Copyright
+(C) Ryan Grunest. All Rights Reserved
